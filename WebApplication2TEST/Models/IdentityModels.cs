@@ -21,7 +21,7 @@ namespace WebApplication2TEST.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("BoVoyageConnection", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +29,21 @@ namespace WebApplication2TEST.Models
         {
             return new ApplicationDbContext();
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ApplicationUser>().ToTable("Users");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+        }
+        public DbSet<AgenceVoyage> AgencesVoyages { get; set; }
+        public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Voyage> Voyages { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Assurance> Assurances { get; set; }
+        public DbSet<DossierReservation> DossiersReservations { get; set; }
+        public DbSet<Participant> Participants { get; set; }
     }
 }
