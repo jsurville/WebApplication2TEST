@@ -23,8 +23,8 @@ namespace WebApplication2TEST.Models
 		public int PlacesDisponibles { get; set; }
 
 		[Required]
-		[Column(TypeName = "Money")]
-		public decimal PrixParPersonne { get; set; }
+		//[Column(TypeName = "Money")]
+		public double? PrixParPersonne { get; set; }
 
 		[Index("IX_DatesAgenceDestination", 3, IsUnique = true)]
 		public int AgenceVoyageID { get; set; }
