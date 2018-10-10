@@ -8,110 +8,118 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2TEST.Models;
 
-namespace WebApplication2TEST.Areas.Administration.Controllers
+namespace WebApplication2TEST.Areas.BackOffice.Controllers
 {
-    public class DestinationsController : Controller
+    public class VoyagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Administration/Destinations
+        // GET: BackOffice/Voyages
         public ActionResult Index()
         {
-            return View(db.Destinations.ToList());
+            var voyages = db.Voyages.Include(v => v.AgenceVoyage).Include(v => v.Destination);
+            return View(voyages.ToList());
         }
 
-        // GET: Administration/Destinations/Details/5
+        // GET: BackOffice/Voyages/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Destination destination = db.Destinations.Find(id);
-            if (destination == null)
+            Voyage voyage = db.Voyages.Find(id);
+            if (voyage == null)
             {
                 return HttpNotFound();
             }
-            return View(destination);
+            return View(voyage);
         }
 
-        // GET: Administration/Destinations/Create
+        // GET: BackOffice/Voyages/Create
         public ActionResult Create()
         {
+            ViewBag.AgenceVoyageID = new SelectList(db.AgencesVoyages, "ID", "Nom");
+            ViewBag.DestinationID = new SelectList(db.Destinations, "ID", "Continent");
             return View();
         }
 
-        // POST: Administration/Destinations/Create
+        // POST: BackOffice/Voyages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "ID,Continent,Pays,Region,Description")] Destination destination)
+        public ActionResult Create([Bind(Include = "ID,DateAller,DateRetour,PlacesDisponibles,PrixParPersonne,AgenceVoyageID,DestinationID")] Voyage voyage)
         {
             if (ModelState.IsValid)
             {
-                db.Destinations.Add(destination);
+                db.Voyages.Add(voyage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(destination);
+            ViewBag.AgenceVoyageID = new SelectList(db.AgencesVoyages, "ID", "Nom", voyage.AgenceVoyageID);
+            ViewBag.DestinationID = new SelectList(db.Destinations, "ID", "Continent", voyage.DestinationID);
+            return View(voyage);
         }
 
-        // GET: Administration/Destinations/Edit/5
+        // GET: BackOffice/Voyages/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Destination destination = db.Destinations.Find(id);
-            if (destination == null)
+            Voyage voyage = db.Voyages.Find(id);
+            if (voyage == null)
             {
                 return HttpNotFound();
             }
-            return View(destination);
+            ViewBag.AgenceVoyageID = new SelectList(db.AgencesVoyages, "ID", "Nom", voyage.AgenceVoyageID);
+            ViewBag.DestinationID = new SelectList(db.Destinations, "ID", "Continent", voyage.DestinationID);
+            return View(voyage);
         }
 
-        // POST: Administration/Destinations/Edit/5
+        // POST: BackOffice/Voyages/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Continent,Pays,Region,Description")] Destination destination)
+        public ActionResult Edit([Bind(Include = "ID,DateAller,DateRetour,PlacesDisponibles,PrixParPersonne,AgenceVoyageID,DestinationID")] Voyage voyage)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(destination).State = EntityState.Modified;
+                db.Entry(voyage).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(destination);
+            ViewBag.AgenceVoyageID = new SelectList(db.AgencesVoyages, "ID", "Nom", voyage.AgenceVoyageID);
+            ViewBag.DestinationID = new SelectList(db.Destinations, "ID", "Continent", voyage.DestinationID);
+            return View(voyage);
         }
 
-        // GET: Administration/Destinations/Delete/5
+        // GET: BackOffice/Voyages/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Destination destination = db.Destinations.Find(id);
-            if (destination == null)
+            Voyage voyage = db.Voyages.Find(id);
+            if (voyage == null)
             {
                 return HttpNotFound();
             }
-            return View(destination);
+            return View(voyage);
         }
 
-        // POST: Administration/Destinations/Delete/5
+        // POST: BackOffice/Voyages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Destination destination = db.Destinations.Find(id);
-            db.Destinations.Remove(destination);
+            Voyage voyage = db.Voyages.Find(id);
+            db.Voyages.Remove(voyage);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

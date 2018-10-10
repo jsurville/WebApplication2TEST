@@ -195,9 +195,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
-    <Compile Include="Areas\Administration\Controllers\DestinationsController.cs" />
-    <Compile Include="Areas\Administration\Controllers\VoyagesController.cs" />
+    <Compile Include="Areas\BackOffice\BackOfficeAreaRegistration.cs" />
+    <Compile Include="Areas\BackOffice\Controllers\DestinationsController.cs" />
+    <Compile Include="Areas\BackOffice\Controllers\VoyagesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -326,19 +326,19 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
-    <Content Include="Areas\Administration\Views\web.config" />
-    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Administration\Views\Destinations\Create.cshtml" />
-    <Content Include="Areas\Administration\Views\Destinations\Delete.cshtml" />
-    <Content Include="Areas\Administration\Views\Destinations\Details.cshtml" />
-    <Content Include="Areas\Administration\Views\Destinations\Edit.cshtml" />
-    <Content Include="Areas\Administration\Views\Destinations\Index.cshtml" />
-    <Content Include="Areas\Administration\Views\Voyages\Create.cshtml" />
-    <Content Include="Areas\Administration\Views\Voyages\Delete.cshtml" />
-    <Content Include="Areas\Administration\Views\Voyages\Details.cshtml" />
-    <Content Include="Areas\Administration\Views\Voyages\Edit.cshtml" />
-    <Content Include="Areas\Administration\Views\Voyages\Index.cshtml" />
+    <Content Include="Areas\BackOffice\Views\web.config" />
+    <Content Include="Areas\BackOffice\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Destinations\Create.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Destinations\Delete.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Destinations\Details.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Destinations\Edit.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Destinations\Index.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Voyages\Create.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Voyages\Delete.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Voyages\Details.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Voyages\Edit.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Voyages\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -556,7 +556,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\BackOffice\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
